@@ -10,8 +10,9 @@
  #ini_set('display_errors', 'On');
  #error_reporting(E_ALL);
 	
-  include_once('DataBaseConnection.php'); 
- 
+  #include_once('DataBaseConnection.php'); 
+include_once 'EntityModel.php';
+
 	#echo 'Xml Parser';
 
 	$xmlUrl = "http://25livepub.collegenet.com/calendars/NJIT_EVENTS.rss";
@@ -144,11 +145,11 @@
   			$t = "pm";
   		}
   
-  		if(strlen($SplitDate[5]) == 4)//9am
+  		if(strlen($SplitDate[5]) == 5)//9am
   		{
   			$endTime = substr($SplitDate[5],1,1).":00 ".$t;
   		}
-  		else if(strlen($SplitDate[5]) == 5)//12am
+  		else if(strlen($SplitDate[5]) == 6)//12am
   		{
   			$endTime = substr($SplitDate[5],1,2).":00 ".$t;
   		}
@@ -278,9 +279,7 @@
    echo "<b>StartDate : </b>".$startDate."<br/>";
    echo "<b>EndDate : </b>".$EndDate."<br/>";
    echo "<b>WeekDay : </b>".$WeekDay."<br/>";
-   #echo "<b>Dated : </b>".$DateD."<br/>";
-	# echo "<b>Year</b>".$Year."<br/>";
- #	 echo "<b>Time</b>".$Time."<br/>";
+
 	 echo "<b>Start Time : </b>".$startTime."<br/>";
 	 echo "<b>End Time : </b>".$endTime."<br/>";
 	 echo "<b>Place : </b>".$Place."<br/>";
@@ -290,8 +289,41 @@
 	 echo "<b>Image :</b>".$image."<br/>";
 	 echo "<b>link:</b> ".$item->link . "<br />\n";
    
+	 $db = new DBContext();
+	 $temp = $db->findCustom(new Events(),"select * from `Events` where Title = '".$title."' and startDate = '".date("Y-m-d",strtotime($startDate))."' and EndDate = '".date("Y-m-d", strtotime($EndDate))."' and Submitter = '".$Submitter." ' and startTime = '".date("H:i", strtotime($startTime))."'  and endTime = '".date("H:i", strtotime($endTime))."'");
+	 
+	 if($temp)
+	 {
+	 	echo "Found";
+	 }
+	 else
+	 {	
+	 	echo "To Add";
+		 $Event = new Events();
+		 $Event->ID = 0;
+		 $Event->Title = $item->title;
+		 $Event->startDate = date("Y-m-d",strtotime($startDate));
+		 $Event->EndDate = date("Y-m-d", strtotime($EndDate));
+		 $Event->startTime = date("H:i", strtotime($startTime));
+		 $Event->endTime = date("H:i", strtotime($endTime));
+		 $Event->Place = $Place;
+		 $Event->Submitter = $Submitter;
+		 $Event->UserID = NULL;
+		 $Event->Organization = $Organization;
+		 $Event->EventName = $eventname;
+		 $Event->Image = $image;
+		 $Event->link = $item->link;
+		 $Event->Description = $description;
+		 $Event->Approved = 1;
+		 $db->add($Event);
+		 $db->saveChanges();
+		 $lastID = $db->getLastInsertedID();
+		 echo json_encode(array('EventID' => $lastID));
+		 
+	 }
+	 
    //($ID,$Title,$startDate,$EndDate,$startTime,$endDate,$Place,$Submitter,$UserID,$Organization,$Eventname,$Image,$link,$Description)
-   $Event = new Event(0,$item->title,date("Y-m-d",strtotime($startDate)),date("Y-m-d", strtotime($EndDate)), $startTime, $endTime, $Place, $Submitter, NULL, $Organization, $eventname, $image, $item->link, $description,'TRUE' );
+   /* $Event = new Event(0,$item->title,date("Y-m-d",strtotime($startDate)),date("Y-m-d", strtotime($EndDate)), $startTime, $endTime, $Place, $Submitter, NULL, $Organization, $eventname, $image, $item->link, $description,'TRUE' );
    
    $DatabaseConnection = new DataBaseConnection();
    
@@ -305,7 +337,7 @@
    else
    {
      echo "Skip<br/>";
-   }
+   } */
   // $DatabaseConnection->insertEvent($Event);     
 	 
    echo "<br/>";
