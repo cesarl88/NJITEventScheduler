@@ -51,14 +51,15 @@
   		 
   		$db->update($Event);
   		$db->saveChanges();
+  		json_encode(array('Result' => "1"),JSON_PRETTY_PRINT);
   	}
   	catch(Exception $ex)
   	{
-  		
+  		json_encode(array('Result' => "1"),JSON_PRETTY_PRINT);
   	}
   }
   else
-  	echo json_encode(array('Result' => "-1"),JSON_PRETTY_PRINT);
+  	echo json_encode(array('Result' => "-2"),JSON_PRETTY_PRINT);
   
 /*   $DatabaseConnection = new DataBaseConnection();
   #echo '<br/> getEventsbyWeek: ".$Date." <br/>';
