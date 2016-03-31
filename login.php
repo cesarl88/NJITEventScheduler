@@ -6,7 +6,7 @@ include_once 'EntityModel.php';
   $username = $_POST['userName'];
   $Password = $_POST['Password'];
   
-  #echo $username;
+  #echo $Password;
   $db = new DBContext();
   $user = $db->find(new User(),array('UserName' => $username, 'Password' => hash("sha256",$Password)));
   

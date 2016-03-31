@@ -25,30 +25,36 @@
   #$DatabaseConnection = new DataBaseConnection();
   
   #$Event = new Event(0,$title,date("Y-m-d",strtotime($startDate)),date("Y-m-d", strtotime($EndDate)), $startTime, $endTime, $Place, $Submitter, $UserID, $Organization, $eventname, $image, $link, $description,$Approved);
+  try {
+  	$db = new DBContext();
+  	
+  	$Event = new Events();
+  	$Event->ID = 0;
+  	$Event->Title = $title;
+  	$Event->startDate = date("Y-m-d",strtotime($startDate));
+  	$Event->EndDate = date("Y-m-d", strtotime($EndDate));
+  	$Event->startTime = $startTime;
+  	$Event->endTime = $endTime;
+  	$Event->Place = $Place;
+  	$Event->Submitter = $Submitter;
+  	$Event->UserID = $UserID;
+  	$Event->Organization = $Organization;
+  	$Event->EventName = $eventname;
+  	$Event->Image = $image;
+  	$Event->link = $link;
+  	$Event->Description = $description;
+  	$Event->Approved = $Approved;
+  	
+  	$db->add($Event);
+  	$db->saveChanges();
+  	$lastID = $db->getLastInsertedID();
+  	echo json_encode(array('EventID' => $lastID));
+  }
+  catch(Exception $e)
+  {
+  	echo json_encode(array('EventID' => -2));
+  }
   
-  $db = new DBContext();
-  
-  $Event = new Events();
-  $Event->ID = 0;
-  $Event->Title = $title;
-  $Event->startDate = date("Y-m-d",strtotime($startDate));
-  $Event->EndDate = date("Y-m-d", strtotime($EndDate));
-  $Event->startTime = $startTime;
-  $Event->endTime = $endTime;
-  $Event->Place = $Place;
-  $Event->Submitter = $Submitter;
-  $Event->UserID = $UserID;
-  $Event->Organization = $Organization;
-  $Event->EventName = $eventname;
-  $Event->Image = $image;
-  $Event->link = $link;
-  $Event->Description = $description;
-  $Event->Approved = $Approved;
-  
-  $db->add($Event);
-  $db->saveChanges();
-  $lastID = $db->getLastInsertedID();
-  echo json_encode(array('EventID' => $lastID));
     /* $DatabaseConnection->insertEvent($Event);
   $DatabaseConnection->disconnect(); */
 

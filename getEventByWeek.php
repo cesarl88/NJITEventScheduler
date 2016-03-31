@@ -6,8 +6,18 @@ include_once 'EntityModel.php';
   $Approved = $_POST['Approved'];
   
   
+  $UserID = $_POST['UserID'];
   $db = new DBContext();
-  $event = $db->findCustom(new Events(),"select e.* from Events e cross join (select min(startDate) as nextdate from Events where startDate >= Date '".$Date."' and Approved = ".$Approved.") em where e.startDate between em.nextdate and date_add(em.nextdate, interval 1 week) and Approved = ".$Approved.";");
+  
+  if(isset($UserID))
+  {
+  	$query = "select e.* from Events e cross join (select min(startDate) as nextdate from Events where startDate >= Date '".$Date."' and Approved = ".$Approved." and UserID = ".$UserID.") em where e.startDate between em.nextdate and date_add(em.nextdate, interval 1 week) and Approved = ".$Approved.";";
+  }
+  else
+  {
+  	$query = "select e.* from Events e cross join (select min(startDate) as nextdate from Events where startDate >= Date '".$Date."' and Approved = ".$Approved.") em where e.startDate between em.nextdate and date_add(em.nextdate, interval 1 week) and Approved = ".$Approved.";";
+  }
+  $event = $db->findCustom(new Events(),$query);
   
    if($event)
   {

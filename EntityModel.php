@@ -553,6 +553,18 @@ class Events extends Entity{
 
 
 }
+
+class Schedule extends Entity{
+
+	public $UserID;
+	public $EventID;
+	public $dateModified;
+	
+	public $entity_table = 'Schedule';
+	public $entity_class = 'Schedule';
+	public $db_fields = array('EventID','UserID','dateModified');
+	public $primary_keys = array('EventID','UserID');
+}
 /* }
 Log::d("Testing Entity");
 $db = new DBContext();
