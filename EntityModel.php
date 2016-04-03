@@ -564,6 +564,12 @@ class Schedule extends Entity{
 	public $entity_class = 'Schedule';
 	public $db_fields = array('EventID','UserID','dateModified');
 	public $primary_keys = array('EventID','UserID');
+	
+	public function getJSON()
+	{
+		return json_encode( array('ID' => $this->UserID,
+				'EventID' => $this->EventID),JSON_PRETTY_PRINT);
+	}
 }
 /* }
 Log::d("Testing Entity");
