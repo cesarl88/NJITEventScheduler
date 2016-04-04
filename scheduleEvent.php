@@ -1,6 +1,10 @@
 <?php
 
-  #include_once('DataBaseConnection.php');
+/**
+ * Cesar Salazar
+ * This file creates a mapping between the user and the event to be added to the data base
+ * so the user can schedule an event
+ */  
   include_once 'EntityModel.php';
   $UserID = $_POST['UserID'];
   $EventID = $_POST['EventID'];

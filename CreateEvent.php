@@ -1,6 +1,10 @@
 <?php
+/**
+ * Cesar Salazar
+ * This file receive the form for the event creation and 
+ * communicates with the model to add the event into the database
+ */
 
- # include_once('DataBaseConnection.php');
   include_once 'EntityModel.php';
 
   $UserID = $_POST['UserID'];

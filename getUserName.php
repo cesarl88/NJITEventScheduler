@@ -1,6 +1,9 @@
 <?php
 
- # include_once('DataBaseConnection.php');
+/**
+ * Cesar Salazar
+ * This file gets UserName based on the UserID
+ */
 include_once 'EntityModel.php';
 
   $UserID = $_POST['UserID'];

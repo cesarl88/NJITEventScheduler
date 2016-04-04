@@ -1,6 +1,10 @@
 <?php
 
-  #include_once('DataBaseConnection.php');
+/**
+ * Cesar Salazar
+ * This file gets event based on the given date
+ */  
+
   include_once 'EntityModel.php';
 
   $Date = $_POST['Date'];
@@ -64,6 +68,19 @@
   }
   echo "</table>"; */
   
+  /* foreach($test['Events'] as $item)
+  {
+  	$temp = json_decode($item,true);
+  	#var_dump($temp);
+  	echo "<tr>";
+  	echo "<td><a href='./getEventFromTable.php?ID=".$temp['EventID']."' >".$temp['Title']."</a></td>";
+  	echo "<td>".$temp['startDate']."</td>";
+  	echo "<td>".$temp['startTime']."</td>";
+  	echo "<td>".$temp['EndDate']."</td>";
+  	echo "<td>".$temp['endTime']."</td>";
+  	echo "</tr>";
+  }
+  echo "</table>"; */ */
 
   /* $DatabaseConnection = new DataBaseConnection();
   #echo '<br/> getEventsbyWeek: ".$Date." <br/>';

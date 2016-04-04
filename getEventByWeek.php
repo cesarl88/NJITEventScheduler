@@ -1,6 +1,9 @@
 <?php
 
-  #include_once('DataBaseConnection.php');
+/**
+ * Cesar Salazar
+ * This file gets list of events in a week based on the given date 
+ */  
 include_once 'EntityModel.php';
   $Date = $_POST['Date'];
   $Approved = $_POST['Approved'];

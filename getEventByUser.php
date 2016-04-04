@@ -1,6 +1,9 @@
 <?php
 
-  #include_once('DataBaseConnection.php');
+/**
+ * Cesar Salazar
+ * This file gets event based on the given User
+ */  
   include_once 'EntityModel.php';
   $UserID = $_POST['UserID'];
   $db = new DBContext();

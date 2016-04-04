@@ -1,6 +1,11 @@
 <?php
 
-  #include_once('DataBaseConnection.php');
+
+/**
+ * Cesar Salazar
+ * This file deletes an event based on
+ * its ID
+ */
   include_once 'EntityModel.php';
 
   $ID = $_POST['ID'];

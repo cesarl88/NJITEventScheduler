@@ -1,4 +1,9 @@
 <?php
+/**
+ * Cesar Salazar
+ * This file handles the case when the user wants to 
+ * unschedule and event
+ */
 include_once 'EntityModel.php';
   $UserID = $_POST['UserID'];
   $EventID = $_POST['EventID'];

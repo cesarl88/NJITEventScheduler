@@ -1,6 +1,10 @@
 <?php
 
- # include_once('DataBaseConnection.php');
+/**
+ * Cesar Salazar
+ * This file returns the user ID and RoleID that matches the credentials sent 
+ */
+
 include_once 'EntityModel.php';
 
   $username = $_POST['userName'];

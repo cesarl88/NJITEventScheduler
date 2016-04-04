@@ -1,16 +1,10 @@
 <?php
-	#include_once('Model.php');
 
-	#$user = new User('cls33','12345');
-
-	#echo $user->userName;
-	#echo '<br/>';
-	#echo $user->Password;
-	#echo '<br/>';
- #ini_set('display_errors', 'On');
- #error_reporting(E_ALL);
-	
-  #include_once('DataBaseConnection.php'); 
+/**
+ * Cesar Salazar
+ * This files reads the events published on the NJIT
+ * page and parsers the XML to later include in our system
+ */
 include_once 'EntityModel.php';
 
 	#echo 'Xml Parser';

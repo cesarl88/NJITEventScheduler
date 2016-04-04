@@ -1,5 +1,14 @@
 <?php
+/**
+ * Cesar Salazar
+ * This file implements the model for 
+ * the event calendar
+ */
 
+
+/**
+ * Handles the data base connection
+ */
 class Database{
 	
 	private $host      = "sql2.njit.edu";
@@ -301,6 +310,9 @@ class DBContext{
 		return $this->db->ObjectSet($entity->entity_class);
 	}
 	
+	/**
+	 * To insert custom queries
+	 */
 	public function findCustom($entity,$customQuery)
 	{
 		#Log::d("FindCustom");
@@ -308,6 +320,9 @@ class DBContext{
 		return $this->db->ObjectSet($entity->entity_class);
 	}
 	
+	/**
+	 * Save all pending changes
+	 */
 	public function saveChanges()
 	{
 	#	echo "<script>console.log( 'Debug: saveChanges' );</script>";
@@ -398,6 +413,9 @@ class DBContext{
 	
 }
 
+/**
+ * States for the modified, added or deleted objects from database
+ */
 final class EntityState{
 	
 	const Created = 1;
@@ -465,6 +483,9 @@ class Log{
 	}
 }
 
+/**
+ * User model
+ */
 class User extends Entity{
 
 	public $UserID;
@@ -488,6 +509,9 @@ class User extends Entity{
 	 } */
 }
 
+/**
+ * Role model
+ */
 class Role extends Entity{
 
 	public $RoleID;
@@ -507,6 +531,9 @@ class Role extends Entity{
 	 } */
 }
 
+/**
+ * Events model
+ */
 class Events extends Entity{
 
 	public $ID;
@@ -554,6 +581,9 @@ class Events extends Entity{
 
 }
 
+/**
+ * Schedule model
+ */
 class Schedule extends Entity{
 
 	public $UserID;

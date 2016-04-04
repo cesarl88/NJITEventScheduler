@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CS 490 Project</title>
+   <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    
+<style>
+  body {
+    background-color: #C8C8C8; 
+  }     
+    
+</style>
+</head> 
+     
+<body onLoad="loadDoc()"> 
+
+	<a href="./getEventByID.php?ID=14000"> Open Event</a>
+     
+     <form id="form" method="Post" action="Curl.php">
+     <h2 align="right">Username:<input type="text" name="userName">Password:<input type="password" name="Password"><input type="submit" name="Submit" id="submit" value="LOGIN"></h2>
+     </form>
+     <form id="form" method="Post" action="Curl3.php">
+      <p align="left">Date:<input type="text" name="Date"><input type="submit" name="Submit" id="submit" value="SEARCH"></p>
+      </form>
+    
+     
+     <h1><center>EVENT CALENDAR</center></h1>
+       <div id="img1">
+         <center><img src="calendar.jpg"></center>
+       </div>
+       <center>
+         <p>Welcome to the Event Calendar, here 
+         you can find and personalize
+         your personal calendar.
+         </p>
+       </center>
+       <center>
+     <h1>
+         You will have the option to<br>
+         add, delete, or simply view<br>
+         your personal calendar
+     </h1>
+         <img src="calendar3.png" height="350" width="450">
+       </center> 
+       
+       <div id = "events" align="center"></div>
+    
+        
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+    	console.log(xhttp.responseText);
+      document.getElementById("events").innerHTML = xhttp.responseText;
+    }
+  };
+  xhttp.open("POST", "curltest.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("Date=2016-03-28");
+}
+</script> 
+</body>     
+
+</html>

@@ -1,7 +1,9 @@
 <?php
 
-  #include_once('DataBaseConnection.php');
-  
+  /**
+ * Cesar Salazar
+ * This file gets event based on the given ID
+ */  
   include_once 'EntityModel.php';
 
   $ID = $_POST['ID'];

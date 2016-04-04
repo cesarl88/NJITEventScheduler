@@ -1,5 +1,12 @@
 <?php
-include_once 'EntityModel.php';
+
+/**
+ * Cesar Salazar
+ * This file getsSchedule events of a user
+ */
+
+
+  include_once 'EntityModel.php';
   $UserID = $_POST['UserID'];
  // $EventID = $_POST['EventID'];
   
