@@ -18,7 +18,7 @@ include_once 'EntityModel.php';
   	
   	$query = "SELECT * FROM `Events` WHERE `Title` like '%".$keyWord."%' or `Place` like '%".$keyWord."%' or `Submitter` like '%".$keyWord."%' or `Organization` like '%".$keyWord."%' or `EventName` like '%".$keyWord."%' or `Description` like '%".$keyWord."%'";
   	
-  	echo $query."<br/>";
+  	//echo $query."<br/>";
   	
   	$event = $db->findCustom(new Events(),$query);
   	
