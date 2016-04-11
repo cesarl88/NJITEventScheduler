@@ -2,7 +2,7 @@
 
 /**
  * Cesar Salazar
- * This file gets list of events in a week based on the given date 
+ * This file gets list of events in based on the key word 
  */  
 include_once 'EntityModel.php';
   try{
