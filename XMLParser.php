@@ -12,6 +12,8 @@ include_once 'EntityModel.php';
 	$xmlUrl = "http://25livepub.collegenet.com/calendars/NJIT_EVENTS.rss";
 	#$xml_data = file_get_contents($xmlUrl);
 	#$xml_data = simplexml_load_string($xmlUrl);
+	//ini_set('display_errors', 'On');
+	//error_reporting(E_ALL);
 	
 	$xml = new SimpleXMLElement(file_get_contents($xmlUrl));
 
@@ -283,9 +285,16 @@ include_once 'EntityModel.php';
 	 echo "<b>Image :</b>".$image."<br/>";
 	 echo "<b>link:</b> ".$item->link . "<br />\n";
    
+	 echo "About to search for it<br/>";
 	 $db = new DBContext();
-	 $temp = $db->findCustom(new Events(),"select * from `Events` where Title = '".$title."' and startDate = '".date("Y-m-d",strtotime($startDate))."' and EndDate = '".date("Y-m-d", strtotime($EndDate))."' and Submitter = '".$Submitter." ' and startTime = '".date("H:i", strtotime($startTime))."'  and endTime = '".date("H:i", strtotime($endTime))."'");
+	 //echo $query."<br/>";
 	 
+	 
+	 $query = "select * from `Events` where Title = '".addslashes($item->title)."' and startDate = '".date("Y-m-d",strtotime($startDate))."' and EndDate = '".date("Y-m-d", strtotime($EndDate))."' and Submitter = '".addslashes($Submitter)." ' and startTime = '".date("H:i", strtotime($startTime))."'  and endTime = '".date("H:i", strtotime($endTime))."'";
+	 $temp = $db->findCustom(new Events(),$query);
+	 
+	// echo $query."<br/>";
+	// var_dump($temp);
 	 if($temp)
 	 {
 	 	echo "Found";
