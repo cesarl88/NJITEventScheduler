@@ -6,7 +6,7 @@
  */  
 include_once 'EntityModel.php';
   try{
-  	
+  	//echo "hey";
   	$date = $_POST['Date'];
   	$startTime = $_POST['StartTime'];
     $endTime = $_POST['EndTime'];
@@ -18,9 +18,9 @@ include_once 'EntityModel.php';
   	}
   	$db = new DBContext();
   	///SELECT * FROM `Events` WHERE `startDate` = '2016-04-10' and ((`startTime` >= '10:00:00' and `startTime` <= '12:00:00') or `endTime` <= '12:00:00') or (`startTime` <= '10:00:00' and `endTime` >= '12:00:00')
-  	$query = "SELECT * FROM `Events` WHERE `startDate` = ".$date."  and((`startTime` >= '".$startTime."' and `startTime` <= '".$endTime."') or `endTime` <= '".$endTime."') or (`startTime` <= '".$startTime."' and `endTime` >= '".$endTime."')";
+  	$query = "SELECT * FROM `Events` WHERE `startDate` = ".$date."  and ( ( (`startTime` >= '".$startTime."' and `startTime` <= '".$endTime."') or `endTime` <= '".$endTime."') or (`startTime` <= '".$startTime."' and `endTime` >= '".$endTime."') )";
   	
-  #	echo $query."<br/>";
+  	echo $query."<br/>";
   	
   	$event = $db->findCustom(new Events(),$query);
   	
