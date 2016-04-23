@@ -100,7 +100,7 @@ class Database{
 				.(($offset & $limit ? " OFFSET $offset " : ''))
 				. ($order ? " ORDER BY $order" : '');
 
-		#Log::d("$query");
+	#	Log::d("$query");
 		$this->prepare($query);
 	}
 	
@@ -165,7 +165,7 @@ class Database{
 		
 		$query = "UPDATE $table SET $fieldDetails ".($where ? 'WHERE '.$where : '' );
 	
-		
+		#Log::d($query);
 		$this->prepare($query);
 	
 		foreach($data as $key => $value)
@@ -173,7 +173,7 @@ class Database{
 			$this->bind(":$key",$value);
 		}
 	
-		#Log::d($query);
+	#	Log::d($query);
 		
 		$this->execute();
 	}
@@ -551,10 +551,11 @@ class Events extends Entity{
 	public $link;
 	public $Description;
 	public $Approved;
+  public $addToGoogle;
 
 	public $entity_table = 'Events';
 	public $entity_class = 'Events';
-	public $db_fields = array('ID','Title','startDate','EndDate','startTime','endTime','Place','Submitter','UserID','Organization','EventName','Image','link','Description','Approved');
+	public $db_fields = array('ID','Title','startDate','EndDate','startTime','endTime','Place','Submitter','UserID','Organization','EventName','Image','link','Description','Approved','addToGoogle');
 	public $primary_keys = array('ID');
 	
 	public function getJSON()
@@ -573,7 +574,8 @@ class Events extends Entity{
 								 'Image' => $this->Image,
 								 'link' => $this->link,
 								 'Description' => $this->Description,
-								 'Approved' => $this->Approved),JSON_PRETTY_PRINT);  
+								 'Approved' => $this->Approved,
+                 'addToGoogle' => $this->addToGoogle),JSON_PRETTY_PRINT);  
 	}
 
 	
@@ -593,6 +595,27 @@ class Schedule extends Entity{
 	public $entity_table = 'Schedule';
 	public $entity_class = 'Schedule';
 	public $db_fields = array('EventID','UserID','dateModified');
+	public $primary_keys = array('EventID','UserID');
+	
+	public function getJSON()
+	{
+		return json_encode( array('ID' => $this->UserID,
+				'EventID' => $this->EventID),JSON_PRETTY_PRINT);
+	}
+}
+
+/**
+ * Schedule model
+ */
+class GoogleCalendar extends Entity{
+
+	public $UserID;
+	public $EventID;
+	public $ModifiedDate;
+	
+	public $entity_table = 'GoogleCalendar';
+	public $entity_class = 'GoogleCalendar';
+	public $db_fields = array('EventID','UserID','ModifiedDate');
 	public $primary_keys = array('EventID','UserID');
 	
 	public function getJSON()
