@@ -8,11 +8,10 @@
   
   #echo $ID;
   
- // ini_set('display_errors', 'On');
-//	error_reporting(E_ALL);
-  
+//  ini_set('display_errors', 'On');
+//error_reporting(E_ALL);
+  $UserID = $_POST['UserID'];
   $EventID = $_POST['EventID'];
-  $google = $_POST['Google'];
   //var_dump($EventID);
  # var_dump($google);
   $db = new DBContext();
@@ -21,15 +20,19 @@
   if($Event)
   {
   	try{
-  		$Event->addToGoogle = $google;
-  		
-  	#	 var_dump($Event->addToGoogle);
-  		$db->update($Event);
-  		$db->saveChanges();
-  		echo json_encode(array('Result' => "1"),JSON_PRETTY_PRINT);
+  		  $Google = new GoogleCalendar();
+        $Google->UserID = $UserID;
+        $Google->EventID = $EventID;
+        $Google->ModifiedDate = date("Y-m-d");
+        #$today = getdate();
+        #echo $schedule->dateModified;
+        $db->add($Google);
+       	$db->saveChanges();
+       echo json_encode(array('Result' => "1"),JSON_PRETTY_PRINT);
   	}
   	catch(Exception $ex)
   	{
+    // var_dump($ex);
   		echo json_encode(array('Result' => "-2"),JSON_PRETTY_PRINT);
   	}
   }
