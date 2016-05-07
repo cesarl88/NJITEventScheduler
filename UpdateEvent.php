@@ -10,7 +10,7 @@
   $ID = $_POST['ID'];
 
   
-  #echo $ID;
+//  echo $ID;
   
   $UserID = $_POST['UserID'];
   $title = $_POST['title'];
@@ -30,7 +30,7 @@
   if(!isset($Approved))
   	$Approved = 'FALSE';
   
-
+//echo "test";
   $db = new DBContext();
   $Event = $db->find(new Events(),array('ID' => $ID));
   
@@ -54,11 +54,11 @@
   		 
   		$db->update($Event);
   		$db->saveChanges();
-  		json_encode(array('Result' => "1"),JSON_PRETTY_PRINT);
+  		echo json_encode(array('Result' => "1"),JSON_PRETTY_PRINT);
   	}
   	catch(Exception $ex)
   	{
-  		json_encode(array('Result' => "-2"),JSON_PRETTY_PRINT);
+  	 	echo	json_encode(array('Result' => "-2"),JSON_PRETTY_PRINT);
   	}
   }
   else
